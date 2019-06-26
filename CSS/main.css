@@ -4,14 +4,17 @@
     --semi-white: #eee;
     --semi-black: #333;
     --content-size: 80vw;
+    --danger-red: rgb(221, 87, 87);
 }
 
 /* Alterações Genéricas */
-* { margin: 0; }
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: monospace, sans-serif;
-    box-sizing: border-box;
 }
 
 input:focus {
@@ -24,6 +27,7 @@ table {
     margin-top: 10px;
     background-color: #bbb;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 thead th {
@@ -36,7 +40,7 @@ tbody tr {
 
 table td {
     text-align: center;
-    padding: 3px;
+    padding: 5px;
 }
 
 table tbody tr:nth-child(odd) {
@@ -68,6 +72,18 @@ table tbody tr:nth-child(odd) {
     margin: auto;
     margin-top: 10px;
     width: 100%;
+}
+
+.btn-delete {
+    display: block;
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+    max-width: 28px;
+    background-color: var(--danger-red);
+    border-radius: 5px;
+    text-decoration: none;
+    margin: auto;
 }
 
 /* Alterações especificas */
