@@ -1,0 +1,101 @@
+/* Variáveis */
+:root {
+    --blue: #3299ff;
+    --semi-white: #eee;
+    --semi-black: #333;
+    --content-size: 80vw;
+}
+
+/* Alterações Genéricas */
+* { margin: 0; }
+
+body {
+    font-family: monospace, sans-serif;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+}
+
+table {
+    width: var(--content-size);
+    margin: auto;
+    margin-top: 10px;
+    background-color: #bbb;
+    border-radius: 4px;
+}
+
+thead th {
+    padding: 8px;
+}
+
+tbody tr {
+    background-color: #eee;
+}
+
+table td {
+    text-align: center;
+    padding: 3px;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+/* Classes */
+.blue { color: var(--blue); }
+
+.input-block {
+    display: block;
+    margin: 10px 0px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(50, 50, 50, 0.4);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    color: var(--semi-white);
+    background-color: var(--blue);
+    font-size: 1.1em;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Alterações especificas */
+#main {
+    margin: 20px;
+}
+
+#main > h1 {
+    font-size: 3em;
+    font-weight: 100;
+    text-align: center;
+}
+
+#main-book-icon {
+    width: 80px;
+    height: 80px;
+}
+
+#book-form {
+    width: var(--content-size);
+    margin: 20px auto;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Alteração para mobile */
+@media screen and (max-width: 425px) {
+    #main > h1 {
+        font-size: 2.3em;
+    }
+}
