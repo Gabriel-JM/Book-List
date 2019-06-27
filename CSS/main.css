@@ -1,5 +1,6 @@
 /* Variáveis */
 :root {
+    font-size: 17px;
     --blue: #3299ff;
     --semi-white: #eee;
     --semi-black: #333;
@@ -10,7 +11,6 @@
 /* Alterações Genéricas */
 * {
     margin: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -61,9 +61,9 @@ table tbody tr:nth-child(odd) {
 }
 
 .btn-submit {
-    color: var(--semi-white);
+    color: white;
     background-color: var(--blue);
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: 500;
     border: none;
     border-radius: 4px;
@@ -92,7 +92,7 @@ table tbody tr:nth-child(odd) {
 }
 
 #main > h1 {
-    font-size: 3em;
+    font-size: 3rem;
     font-weight: 100;
     text-align: center;
 }
@@ -111,7 +111,11 @@ table tbody tr:nth-child(odd) {
 
 /* Alteração para mobile */
 @media screen and (max-width: 425px) {
+    :root {
+        font-size: 18px;
+    }
+    
     #main > h1 {
-        font-size: 2.3em;
+        font-size: 2.4rem;
     }
 }
