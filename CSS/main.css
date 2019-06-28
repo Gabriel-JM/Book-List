@@ -6,6 +6,7 @@
     --semi-black: #333;
     --content-size: 80vw;
     --danger-red: rgb(221, 87, 87);
+    --ok-green: #71cc71;
 }
 
 /* Alterações Genéricas */
@@ -18,6 +19,10 @@ body {
 }
 
 input:focus {
+    outline: none;
+}
+
+button:focus {
     outline: none;
 }
 
@@ -84,6 +89,27 @@ table tbody tr:nth-child(odd) {
     border-radius: 5px;
     text-decoration: none;
     margin: auto;
+}
+
+.alert {
+    width: var(--content-size);
+    font-size: 1.1rem;
+    margin: auto;
+    margin-top: 23px;
+    margin-bottom: -8px;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+}
+
+.alert-danger {
+    background-color: var(--danger-red);
+}
+
+.alert-success {
+    background-color: var(--ok-green);
 }
 
 /* Alterações especificas */
