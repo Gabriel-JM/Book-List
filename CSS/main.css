@@ -7,6 +7,11 @@
     --content-size: 80vw;
     --danger-red: rgb(221, 87, 87);
     --ok-green: #71cc71;
+    --modal-cont-bg: rgba(0, 0, 0, 0.25);
+    --modal-bg: white;
+    --modal-divide-line: rgba(0, 0, 0, 0.3);
+    --btn-save: #01a54a;
+    --hover-save: #084;
 }
 
 /* Alterações Genéricas */
@@ -16,6 +21,7 @@
 
 body {
     font-family: monospace, sans-serif;
+    box-sizing: border-box;
 }
 
 input:focus {
@@ -48,9 +54,14 @@ table td {
     padding: 5px;
 }
 
+table thead th:last-child {
+   width: 20%;
+}
+
 table tbody tr:nth-child(odd) {
     background-color: white;
 }
+
 
 /* Classes */
 .blue { color: var(--blue); }
@@ -63,6 +74,11 @@ table tbody tr:nth-child(odd) {
     border: 1px solid rgba(50, 50, 50, 0.4);
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
 }
 
 .btn-submit {
@@ -82,13 +98,24 @@ table tbody tr:nth-child(odd) {
 .btn-delete {
     display: block;
     color: white;
-    font-weight: bold;
-    padding: 6px;
-    max-width: 28px;
+    font-weight: bolder;
+    padding: 8px;
+    width: 28px;
     background-color: var(--danger-red);
     border-radius: 5px;
     text-decoration: none;
-    margin: auto;
+    margin-right: 10px;
+}
+
+.btn-edit {
+    display: block;
+    color: white;
+    background: var(--blue);
+    width: 28px;
+    padding: 8px;
+    border-radius: 5px;
+    margin-right: 10%;
+    text-decoration: none;
 }
 
 .alert {
@@ -110,6 +137,108 @@ table tbody tr:nth-child(odd) {
 
 .alert-success {
     background-color: var(--ok-green);
+}
+
+.modal-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--modal-cont-bg);
+    transition: all 0.5s;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition: all 1s;
+    animation: fade-in 0.5s; 
+}
+
+.modal {
+    background-color: var(--modal-bg);
+    padding: 26px;
+    border-radius: 6px;
+    width: 55vw;
+    box-sizing: border-box;
+    border: 5px solid var(--blue);
+    box-shadow: 0px 0px 0px 7px white,
+        0px 0px 7px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    animation: drop-down 0.5s;
+}
+
+.modal-header {
+    padding: 4px 8px;
+}
+
+.modal-header {
+    margin-bottom: 20px;
+    font-size: 1.7rem;
+    text-align: center;
+    border-bottom :1px solid var(--modal-divide-line);
+}
+
+.modal-form {
+    padding: 4px 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2;
+    grid-column-gap: 10px;
+}
+
+.modal-form label {
+    width: 100%;
+    font-size: 1.08rem;
+    box-sizing: border-box;
+}
+
+.modal-form label:last-child {
+    grid-column: 1 / 3;
+}
+
+.modal-form label input {
+    display: block;
+    width: 100%;
+    padding: 5px 8px;
+    margin: 4px 0px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-actions button {
+    width: 49%;
+    font-size: 1rem;
+    padding: 8px 0px;
+    background: #ccc;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.modal-actions button.save {
+    background-color: var(--btn-save);
+}
+
+.modal-actions button.save:hover {
+    background-color: var(--hover-save);
+}
+
+.modal-actions button.cancel:hover {
+    background-color: #aaa;
 }
 
 /* Alterações especificas */
@@ -135,6 +264,25 @@ table tbody tr:nth-child(odd) {
     font-weight: bold;
 }
 
+/* Animações */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes drop-down {
+    from {
+        transform: translateY(-30px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
 /* Alteração para mobile */
 @media screen and (max-width: 425px) {
     :root {
@@ -143,5 +291,22 @@ table tbody tr:nth-child(odd) {
     
     #main > h1 {
         font-size: 2.4rem;
+    }
+
+    .modal{
+        width: 90vw;
+    }
+
+    .modal-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-form label {
+        width: 100%;
+    }
+
+    .modal-form label input {
+        width: 95%;
     }
 }
