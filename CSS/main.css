@@ -189,7 +189,8 @@ table tbody tr:nth-child(odd) {
 
 .modal-form label {
     width: 100%;
-    font-size: 1.08rem;
+    font-size: 1.07rem;
+    font-weight: bold;
     box-sizing: border-box;
 }
 
@@ -203,6 +204,7 @@ table tbody tr:nth-child(odd) {
     padding: 5px 8px;
     margin: 4px 0px;
     margin-bottom: 6px;
+    font-size: 0.95rem;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     box-sizing: border-box;
