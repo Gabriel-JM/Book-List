@@ -28,17 +28,25 @@ document.querySelector('#book-form').addEventListener('submit', e => {
         // Create book object
         const book = new Book(title, author, isbn)
 
-        // Add the new Book to UI
-        UI.addBookToList(book)
+        // Verify if the isbn already exists
+        if(Store.checkIsbn(book.isbn)) {
 
-        // Add the book to the store
-        Store.addBook(book)
+            // Add the new Book to UI
+            UI.addBookToList(book)
 
-        // Show success message
-        UI.showAlerts('Book Added with success!', 'alert-success')
+            // Add the book to the store
+            Store.addBook(book)
 
-        // Clear fields
-        UI.clearFields()
+            // Show success message
+            UI.showAlerts('Book Added with success!', 'alert-success')
+
+            // Clear fields
+            UI.clearFields()
+        } 
+        else {
+            // Alert if the isbn already exists
+            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+        }
     }
 })
 

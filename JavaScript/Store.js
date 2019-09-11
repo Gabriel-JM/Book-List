@@ -36,4 +36,21 @@ class Store {
             localStorage.setItem('Books', JSON.stringify(books))
         }
     }
+
+    static checkIsbn(isbn) {
+        
+        // Catch the isbn of the stored books
+        const storeIsbns = this.getBooks().map(e => e.isbn)
+
+        let result = true
+
+        storeIsbns.forEach(e => {
+            if(e === isbn) {
+                result = false
+            }
+        })
+
+        return result
+    }
+
 }

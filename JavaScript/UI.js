@@ -58,25 +58,32 @@ class UI {
             tdsText.push(i)
         }
 
-        const list = Store.getBooks()
-        list.forEach((e, i) => {
-            if(e.isbn === tdsText[2].innerHTML) {
-                ind = i
-            }
-        })
+        if(Store.checkIsbn(modalForm.isbn.value)) {
 
-        list[ind].title = modalForm.title.value
-        list[ind].author = modalForm.author.value
-        list[ind].isbn = modalForm.isbn.value
+            const list = Store.getBooks()
+            list.forEach((e, i) => {
+                if(e.isbn === tdsText[2].innerHTML) {
+                    ind = i
+                }
+            })
 
-        tdsText[0].innerHTML = list[ind].title
-        tdsText[1].innerHTML = list[ind].author
-        tdsText[2].innerHTML = list[ind].isbn
+            list[ind].title = modalForm.title.value
+            list[ind].author = modalForm.author.value
+            list[ind].isbn = modalForm.isbn.value
 
-        Store.rePostBooks(list)
+            tdsText[0].innerHTML = list[ind].title
+            tdsText[1].innerHTML = list[ind].author
+            tdsText[2].innerHTML = list[ind].isbn
 
-        this.closeModal('.modal-container')
-        this.showAlerts('Book edited with success!', 'alert-success')
+            Store.rePostBooks(list)
+
+            this.closeModal('.modal-container')
+            this.showAlerts('Book edited with success!', 'alert-success')
+        }
+        else {
+            // Alert if the isbn already exists
+            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+        }
     }
 
     static clearFields() {
