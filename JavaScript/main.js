@@ -8,7 +8,7 @@ class Book {
 }
 
 // Event: Display Books
-document.addEventListener('DOMContentLoaded', UI.displayBooks)
+document.addEventListener('DOMContentLoaded', UI.displayBooks())
 
 // Event: Add Book
 document.querySelector('#book-form').addEventListener('submit', e => {
@@ -65,6 +65,9 @@ document.querySelector('#book-list').addEventListener('click', e => {
 
 //Event: Save edited Book
 document.querySelector('.modal-actions .save').addEventListener('click', e => UI.saveEditedBook(e.target))
+
+//Event: Cancel Edited Book
+document.querySelector('.modal-actions .cancel').addEventListener('click', () => UI.closeModal('.modal-container'))
 
 // Event: Close modal
 document.querySelector('.modal-container').addEventListener('click', e => {

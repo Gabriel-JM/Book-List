@@ -6,11 +6,10 @@
     --semi-black: #333;
     --content-size: 80vw;
     --danger-red: rgb(221, 87, 87);
-    --ok-green: #71cc71;
+    --ok-green: #61bb71;
     --modal-cont-bg: rgba(0, 0, 0, 0.25);
     --modal-bg: white;
     --modal-divide-line: rgba(0, 0, 0, 0.3);
-    --btn-save: #01a54a;
     --hover-save: #084;
 }
 
@@ -61,7 +60,6 @@ table thead th:last-child {
 table tbody tr:nth-child(odd) {
     background-color: white;
 }
-
 
 /* Classes */
 .blue { color: var(--blue); }
@@ -119,7 +117,10 @@ table tbody tr:nth-child(odd) {
 }
 
 .alert {
-    width: var(--content-size);
+    position: fixed;
+    top: 0px;
+    right: 20px;
+    max-width: 25vw;
     font-size: 1.1rem;
     margin: auto;
     margin-top: 23px;
@@ -129,6 +130,7 @@ table tbody tr:nth-child(odd) {
     text-align: center;
     color: white;
     border-radius: 3px;
+    animation: show 3s ease-out;
 }
 
 .alert-danger {
@@ -139,6 +141,7 @@ table tbody tr:nth-child(odd) {
     background-color: var(--ok-green);
 }
 
+/* Modal Style */
 .modal-container {
     position: fixed;
     width: 100%;
@@ -232,7 +235,7 @@ table tbody tr:nth-child(odd) {
 }
 
 .modal-actions button.save {
-    background-color: var(--btn-save);
+    background-color: var(--ok-green);
 }
 
 .modal-actions button.save:hover {
@@ -285,6 +288,21 @@ table tbody tr:nth-child(odd) {
     }
 }
 
+@keyframes show {
+    0% {
+        transform: translateX(125%);
+    }
+    25% {
+        transform: translateX(0px);
+    }
+    75% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(125%);
+    }
+}
+
 /* Alteração para mobile */
 @media screen and (max-width: 425px) {
     :root {
@@ -310,5 +328,13 @@ table tbody tr:nth-child(odd) {
 
     .modal-form label input {
         width: 95%;
+    }
+
+    table td:last-child {
+        flex-direction: column;
+    }
+
+    .alert {
+        max-width: 50vw;
     }
 }

@@ -1,7 +1,9 @@
 // UI Class: Handle UI Tasks
 class UI {
 
-    tr
+    constructor() {
+        this.tr
+    }
 
     static displayBooks() {
         const books = Store.getBooks()
@@ -73,7 +75,8 @@ class UI {
 
         Store.rePostBooks(list)
 
-        UI.closeModal('.modal-container')
+        this.closeModal('.modal-container')
+        this.showAlerts('Book edited with success!', 'alert-success')
     }
 
     static clearFields() {
@@ -87,14 +90,13 @@ class UI {
         div.className = `alert ${className}`
         div.appendChild(document.createTextNode(message))
 
-        const mainDiv = document.querySelector('#main')
-        const mainSection = document.querySelector('#main-section')
-        mainDiv.insertBefore(div, mainSection)
+        document.body.appendChild(div)
+        div.style.transform = 'translateX(0px)'
 
         // Vanish in 3 seconds
         setTimeout(() => {
             document.querySelector('.alert').remove()
-        }, 2500)
+        }, 3000)
     }
 
     static closeModal(el) {
