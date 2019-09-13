@@ -2,12 +2,18 @@
 class UI {
 
     constructor() {
-        this.tr
+        this.tr,
+        this.tdsText
     }
 
     static displayBooks() {
         const books = Store.getBooks()
         books.forEach(book => UI.addBookToList(book))
+    }
+
+    static reDisplayBooks() {
+        document.querySelector('#book-list').innerHTML = ''
+        this.displayBooks()
     }
 
     static addBookToList(book) {
@@ -35,54 +41,44 @@ class UI {
     static editBook(el, modalEl) {
         const modal = document.querySelector(modalEl)
         const modalForm = modal.querySelector('.modal-form')
-        this.tr = el.parentElement.parentElement
-        const tdsText = []
 
+        // Show the modal
         modal.style.display = 'grid'
 
-        for(let i of this.tr.children) {
-            tdsText.push(i.innerHTML)
-        }
+        // Get the Table line and column data
+        this.tr = el.parentElement.parentElement
+        this.findTdsText()
 
-        modalForm.title.value = tdsText[0]
-        modalForm.author.value = tdsText[1]
-        modalForm.isbn.value = tdsText[2]
+        modalForm.title.value = this.tdsText[0]
+        modalForm.author.value = this.tdsText[1]
+        modalForm.isbn.value = this.tdsText[2]
     }
 
     static saveEditedBook(el) {
         const modalForm = document.querySelector('.modal-form')
-        const tdsText = []
-        let ind = 0
+        const list = Store.getBooks()
 
-        for(let i of this.tr.children) {
-            tdsText.push(i)
-        }
-
+        // Verify if the isbn of the book already exists
         if(Store.checkIsbn(modalForm.isbn.value)) {
 
-            const list = Store.getBooks()
-            list.forEach((e, i) => {
-                if(e.isbn === tdsText[2].innerHTML) {
-                    ind = i
-                }
-            })
+            // Find the index of the edited book
+            const i = Store.findBookIndex(this.tdsText[2].innerHTML)
 
-            list[ind].title = modalForm.title.value
-            list[ind].author = modalForm.author.value
-            list[ind].isbn = modalForm.isbn.value
+            // Changing the book attributes the new ones
+            list[i].title = modalForm.title.value
+            list[i].author = modalForm.author.value
+            list[i].isbn = modalForm.isbn.value
 
-            tdsText[0].innerHTML = list[ind].title
-            tdsText[1].innerHTML = list[ind].author
-            tdsText[2].innerHTML = list[ind].isbn
-
+            // Re posting the book on the Storage
             Store.rePostBooks(list)
 
-            this.closeModal('.modal-container')
-            this.showAlerts('Book edited with success!', 'alert-success')
+            return true
         }
         else {
             // Alert if the isbn already exists
             UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+
+            return false
         }
     }
 
@@ -108,6 +104,15 @@ class UI {
 
     static closeModal(el) {
         document.querySelector(el).style.display = 'none'
+    }
+
+    // Grab the text inside of each table cell of the line
+    static findTdsText() {
+        const array = []
+        for(let i of this.tr.children) {
+            array.push(i.innerHTML)
+        }
+        this.tdsText = array
     }
 
 }

@@ -63,16 +63,25 @@ document.querySelector('#book-list').addEventListener('click', e => {
 
         // Show success message
         UI.showAlerts('Book Removed with success!', 'alert-success')
-    } 
+    }
+    //Verify if the target is the edit button
     else if(e.target.title === 'Edit') {
-        //Verify if the target is the edit button
+        // Open the modal for editing the book
         UI.editBook(e.target, '.modal-container')
     }
 
 })
 
 //Event: Save edited Book
-document.querySelector('.modal-actions .save').addEventListener('click', e => UI.saveEditedBook(e.target))
+document.querySelector('.modal-actions .save').addEventListener('click', e => {
+    // Verify if has success on save the edited book
+    if(UI.saveEditedBook(e.target)) {
+        // Re display the books, close the modal and show success message
+        UI.reDisplayBooks()
+        UI.closeModal('.modal-container')
+        UI.showAlerts('Book edited with success!', 'alert-success')
+    }
+})
 
 //Event: Cancel Edited Book
 document.querySelector('.modal-actions .cancel').addEventListener('click', () => UI.closeModal('.modal-container'))

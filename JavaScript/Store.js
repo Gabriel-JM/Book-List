@@ -37,6 +37,7 @@ class Store {
         }
     }
 
+    // Verify if the book already exists
     static checkIsbn(isbn) {
         
         // Catch the isbn of the stored books
@@ -51,6 +52,18 @@ class Store {
         })
 
         return result
+    }
+
+    static findBookIndex(isbn) {
+        let index = 0
+
+        this.getBooks().forEach((e, i) => {
+            if(e.isbn === isbn) {
+                index = i
+            }
+        })
+
+        return index
     }
 
 }
