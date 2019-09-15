@@ -188,6 +188,7 @@ table tbody tr:nth-child(odd) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 2;
     grid-column-gap: 10px;
+    justify-items: center;
 }
 
 .modal-form label {
