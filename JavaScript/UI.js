@@ -58,8 +58,9 @@ class UI {
         const modalForm = document.querySelector('.modal-form')
         const list = Store.getBooks()
 
-        // Verify if the isbn of the book already exists
-        if(Store.checkIsbn(modalForm.isbn.value)) {
+        // Verify if the isbn of the book already exists or it's did not has changed
+        if(Store.checkIsbn(modalForm.isbn.value) ||
+            this.tdsText[2] === modalForm.isbn.value) {
 
             // Find the index of the edited book
             const i = Store.findBookIndex(this.tdsText[2].innerHTML)
