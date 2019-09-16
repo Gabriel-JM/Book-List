@@ -35,17 +35,9 @@ table {
     width: var(--content-size);
     margin: auto;
     margin-top: 10px;
-    background-color: #bbb;
-    border-radius: 4px;
+    background-color: #545454;
+    border-radius: 3px;
     box-sizing: border-box;
-}
-
-thead th {
-    padding: 8px;
-}
-
-tbody tr {
-    background-color: #eee;
 }
 
 table td {
@@ -53,11 +45,20 @@ table td {
     padding: 5px;
 }
 
-table thead th:last-child {
+thead th {
+    padding: 8px;
+    background-color: #989898;
+}
+
+thead th:last-child {
    width: 20%;
 }
 
-table tbody tr:nth-child(odd) {
+tbody tr {
+    background-color: #e4e4e4;
+}
+
+tbody tr:nth-child(odd) {
     background-color: white;
 }
 

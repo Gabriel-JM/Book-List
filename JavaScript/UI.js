@@ -59,16 +59,13 @@ class UI {
         const list = Store.getBooks()
 
         // Verify if the isbn of the book already exists or it's did not has changed
-        if(Store.checkIsbn(modalForm.isbn.value) ||
-            this.tdsText[2] === modalForm.isbn.value) {
+        if(Store.checkIsbn(modalForm.isbn.value) || this.tdsText[2] === modalForm.isbn.value) {
 
             // Find the index of the edited book
-            const i = Store.findBookIndex(this.tdsText[2].innerHTML)
+            const i = Store.findBookIndex(this.tdsText[2])
 
             // Changing the book attributes the new ones
-            list[i].title = modalForm.title.value
-            list[i].author = modalForm.author.value
-            list[i].isbn = modalForm.isbn.value
+            this.changeBookAttributes(list[i], modalForm)
 
             // Re posting the book on the Storage
             Store.rePostBooks(list)
@@ -114,6 +111,15 @@ class UI {
             array.push(i.innerHTML)
         }
         this.tdsText = array
+    }
+
+    static changeBookAttributes(book, form) {
+        // Grab the object attributes names
+        const keys = Object.keys(book)
+
+        // Loop through the names and change the content
+        keys.forEach(e => book[e] = form[e].value)
+
     }
 
 }
