@@ -2,8 +2,7 @@
 class UI {
 
     constructor() {
-        this.tr,
-        this.tdsText
+        this.tr
     }
 
     static displayBooks() {
@@ -38,52 +37,33 @@ class UI {
         }
     }
 
-    static editBook(el, modalEl) {
-        const modal = document.querySelector(modalEl)
-        const modalForm = modal.querySelector('.modal-form')
+    static showModal(modal) {
+        document.querySelector(modal).style.display = 'grid'
+    }
 
-        // Show the modal
-        modal.style.display = 'grid'
+    static closeModal(el) {
+        document.querySelector(el).style.display = 'none'
+    }
+
+    static editBook(el) {
+        const modalForm = document.querySelector('.modal-form')
 
         // Get the Table line and column data
         this.tr = el.parentElement.parentElement
-        this.findTdsText()
+        const tds = this.findTdsText()
 
-        modalForm.title.value = this.tdsText[0]
-        modalForm.author.value = this.tdsText[1]
-        modalForm.isbn.value = this.tdsText[2]
-    }
-
-    static saveEditedBook(el) {
-        const modalForm = document.querySelector('.modal-form')
-        const list = Store.getBooks()
-
-        // Verify if the isbn of the book already exists or it's did not has changed
-        if(Store.checkIsbn(modalForm.isbn.value) || this.tdsText[2] === modalForm.isbn.value) {
-
-            // Find the index of the edited book
-            const i = Store.findBookIndex(this.tdsText[2])
-
-            // Changing the book attributes the new ones
-            this.changeBookAttributes(list[i], modalForm)
-
-            // Re posting the book on the Storage
-            Store.rePostBooks(list)
-
-            return true
-        }
-        else {
-            // Alert if the isbn already exists
-            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
-
-            return false
-        }
+        tds.forEach((e, i) => {
+            if(modalForm.elements[i]) {
+                modalForm.elements[i].value = tds[i]
+            }
+        })
     }
 
     static clearFields() {
-        document.querySelector('#title').value = ''
-        document.querySelector('#author').value = ''
-        document.querySelector('#isbn').value = ''
+        const form = document.querySelector('#book-form')
+        for(let i=0; i<form.length; i++) {
+            form.elements[i].value = ''
+        }
     }
 
     static showAlerts(message, className) {
@@ -100,21 +80,17 @@ class UI {
         }, 3000)
     }
 
-    static closeModal(el) {
-        document.querySelector(el).style.display = 'none'
-    }
-
     // Grab the text inside of each table cell of the line
     static findTdsText() {
         const array = []
         for(let i of this.tr.children) {
             array.push(i.innerHTML)
         }
-        this.tdsText = array
+        return array
     }
 
     static changeBookAttributes(book, form) {
-        // Grab the object attributes names
+        // Grab the object attribute's names
         const keys = Object.keys(book)
 
         // Loop through the names and change the content

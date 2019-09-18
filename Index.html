@@ -18,10 +18,14 @@
 
                 <label>Author<input type="text" id="author" class="input-block"></label>
 
-                <label>ISBN#<input type="text" id="isbn" class="input-block"></label>
+                <label>ISBN#<input type="number" id="isbn" class="input-block"></label>
 
                 <button id="add-book-btn" class="btn-submit">Add Book</button>
             </form>
+
+            <div class="div-search">
+                <input type="search" id="search-input" placeholder="Search...">
+            </div>
 
             <table>
                 <thead>
@@ -43,7 +47,7 @@
     <div class="modal-container">
         <div class="modal">
             <div class="modal-header">
-                <h3>Edit Book</h3>
+                <h3 modal-title></h3>
             </div>
             <form class="modal-form">
                 <label>Title
@@ -55,7 +59,7 @@
                 </label>
 
                 <label>ISBN#
-                    <input type="text" name="isbn">
+                    <input type="number" name="isbn">
                 </label>
             </form>
             <div class="modal-actions">

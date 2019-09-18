@@ -66,20 +66,49 @@ document.querySelector('#book-list').addEventListener('click', e => {
     }
     //Verify if the target is the edit button
     else if(e.target.title === 'Edit') {
+        // Show the modal
+        UI.showModal('.modal-container')
+        // Change the modal title
+        document.querySelector('[modal-title]').innerHTML = 'Edit Book'
         // Open the modal for editing the book
-        UI.editBook(e.target, '.modal-container')
+        UI.editBook(e.target)
     }
 
 })
 
 //Event: Save edited Book
 document.querySelector('.modal-actions .save').addEventListener('click', e => {
-    // Verify if has success on save the edited book
-    if(UI.saveEditedBook(e.target)) {
-        // Re display the books, close the modal and show success message
-        UI.reDisplayBooks()
-        UI.closeModal('.modal-container')
-        UI.showAlerts('Book edited with success!', 'alert-success')
+    const modalForm = document.querySelector('.modal-form')
+
+    if(modalForm.title.value === '' || modalForm.author.value === '' || modalForm.isbn.value === '') {
+        UI.showAlerts('Please Fill in all the fields', 'alert-danger')
+    } 
+    else {
+        const list = Store.getBooks()
+        const tds = UI.findTdsText()
+
+        // Verify if the isbn of the book already exists or it's did not has changed
+        if(Store.checkIsbn(modalForm.isbn.value) || tds[2] === modalForm.isbn.value) {
+
+            // Find the index of the edited book
+            const i = Store.findBookIndex(tds[2])
+
+            // Changing the book attributes the new ones
+            UI.changeBookAttributes(list[i], modalForm)
+
+            // Re posting the book on the Storage
+            Store.rePostBooks(list)
+
+             // Re display the books, close the modal and show success message
+            UI.reDisplayBooks()
+            UI.closeModal('.modal-container')
+            UI.showAlerts('Book edited with success!', 'alert-success')
+        }
+        else {
+            // Alert if the isbn already exists
+            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+
+        }
     }
 })
 

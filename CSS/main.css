@@ -35,7 +35,7 @@ table {
     width: var(--content-size);
     margin: auto;
     margin-top: 10px;
-    background-color: #545454;
+    background-color: #595959;
     border-radius: 3px;
     box-sizing: border-box;
 }
@@ -47,7 +47,7 @@ table td {
 
 thead th {
     padding: 8px;
-    background-color: #989898;
+    background-color: #a8a8a8;
 }
 
 thead th:last-child {
@@ -117,6 +117,20 @@ tbody tr:nth-child(odd) {
     text-decoration: none;
 }
 
+.div-search {
+    width: 80vw;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: auto;
+}
+
+.div-search input {
+    margin-right: 5px;
+    padding: 5px 8px;
+    border: 1px solid rgba(30, 30, 30, 0.4);
+    border-radius: 4px;
+}
+
 .alert {
     position: fixed;
     top: 0px;
@@ -155,7 +169,6 @@ tbody tr:nth-child(odd) {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    transition: all 1s;
     animation: fade-in 0.5s; 
 }
 
@@ -170,6 +183,7 @@ tbody tr:nth-child(odd) {
         0px 0px 7px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
     animation: drop-down 0.5s;
+    transition: all 0.3s ease-out;
 }
 
 .modal-header {
