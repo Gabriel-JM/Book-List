@@ -60,10 +60,7 @@ class UI {
     }
 
     static clearFields() {
-        const form = document.querySelector('#book-form')
-        for(let i=0; i<form.length; i++) {
-            form.elements[i].value = ''
-        }
+        document.querySelector('#book-form').reset()
     }
 
     static showAlerts(message, className) {
@@ -96,6 +93,15 @@ class UI {
         // Loop through the names and change the content
         keys.forEach(e => book[e] = form[e].value)
 
+    }
+
+    static showSearchedBooks(input) {
+        const bookTable = document.getElementById('book-list')
+        let title = ''
+        for(let i=0; i<bookTable.children.length; i++) {
+            title = bookTable.children[i].cells[0].innerHTML;
+            bookTable.children[i].style.display = (!RegExp(input.value).test(title.toLowerCase()) && input.value !== '') ? 'none' : '';
+        }
     }
 
 }

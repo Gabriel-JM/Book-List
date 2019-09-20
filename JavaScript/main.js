@@ -10,6 +10,11 @@ class Book {
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks())
 
+// Event: Search Books
+document.querySelector('[search-input]').addEventListener('input', e => {
+    UI.showSearchedBooks(e.target)
+})
+
 // Event: Add Book
 document.querySelector('#book-form').addEventListener('submit', e => {
     // Prevent Actual Submit
