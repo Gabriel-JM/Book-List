@@ -46,8 +46,13 @@ table td {
 }
 
 thead th {
+    width: 25%;
     padding: 8px;
     background-color: #a8a8a8;
+}
+
+thead th:first-child {
+    width: 30%;
 }
 
 thead th:last-child {
@@ -80,18 +85,16 @@ tbody tr:nth-child(odd) {
     justify-content: center;
 }
 
-.btn-submit {
+.btn-add {
     color: white;
     background-color: var(--blue);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     border: none;
     border-radius: 4px;
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
-    margin: auto;
-    margin-top: 10px;
-    width: 100%;
+    width: 15%;
 }
 
 .btn-delete {
@@ -117,15 +120,19 @@ tbody tr:nth-child(odd) {
     text-decoration: none;
 }
 
-.div-search {
+.div-actions {
     width: 80vw;
     display: flex;
-    flex-direction: row-reverse;
+    padding: 0px 4px;
+    padding-bottom: 8px;
+    justify-content: space-between;
+    align-items: center;
     margin: auto;
+    box-sizing: border-box;
 }
 
-.div-search input {
-    margin-right: 5px;
+.div-actions input {
+    width: 20%;
     padding: 5px 8px;
     border: 1px solid rgba(30, 30, 30, 0.4);
     border-radius: 4px;

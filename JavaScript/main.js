@@ -16,7 +16,7 @@ document.querySelector('[search-input]').addEventListener('input', e => {
 })
 
 // Event: Add Book
-document.querySelector('#book-form').addEventListener('submit', e => {
+document.querySelector('#add-book-btn').addEventListener('click', e => {
     // Prevent Actual Submit
     e.preventDefault()
 

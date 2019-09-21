@@ -100,7 +100,11 @@ class UI {
         let title = ''
         for(let i=0; i<bookTable.children.length; i++) {
             title = bookTable.children[i].cells[0].innerHTML;
-            bookTable.children[i].style.display = (!RegExp(input.value).test(title.toLowerCase()) && input.value !== '') ? 'none' : '';
+            if(!RegExp(input.value.toLowerCase()).test(title.toLowerCase()) && input.value !== '') {
+                bookTable.children[i].style.display = 'none'
+            } else {
+                bookTable.children[i].style.display =  '';
+            }
         }
     }
 
