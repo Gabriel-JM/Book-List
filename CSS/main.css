@@ -1,3 +1,9 @@
+/*Fontes*/
+@font-face {
+    font-family: 'Byom Icons';
+    src: url("../Fonts/Byom-Icons-Trial.ttf");
+}
+
 /* Variáveis */
 :root {
     font-size: 17px;
@@ -115,6 +121,7 @@ tbody tr {
     border-radius: 5px;
     margin-right: 10%;
     text-decoration: none;
+    position: relative;
 }
 
 .div-actions {
@@ -166,6 +173,18 @@ tbody tr {
     height: 50px;
     color: var(--semi-white);
     box-sizing: border-box;
+}
+
+.trash::before {
+    content: 'U';
+    font-family: Byom Icons;
+    font-weight: bold;
+}
+
+.pencil::after {
+    content: 'E';
+    font-family: Byom Icons;
+    font-weight: bold;
 }
 
 /* Modal Style */

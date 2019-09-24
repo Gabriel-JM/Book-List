@@ -24,8 +24,8 @@ class UI {
             <td>${book.author}</td>
             <td>${book.isbn}</td>
             <td class="actions">
-                <a href="#" class="btn-edit fa fa-pencil-alt" title="Edit"></a>
-                <a href="#" class="btn-delete fa fa-times" title="Delete"></a>
+                <a href="#" class="btn-edit pencil" title="Edit"></a>
+                <a href="#" class="btn-delete trash" title="Delete"></a>
             </td>`
 
         list.appendChild(row)
