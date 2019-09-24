@@ -8,30 +8,57 @@ class Book {
 }
 
 // Event: Display Books
-document.addEventListener('DOMContentLoaded', UI.displayBooks())
+document.addEventListener('DOMContentLoaded', () => {
+    // If has no book show the "No book" message
+    if(Store.getBooks().length === 0) {
+        UI.showNoBookMessage()
+    } else {
+        UI.hideNoBookMessage()
+        UI.displayBooks()
+    }
+})
 
 // Event: Search Books
 document.querySelector('[search-input]').addEventListener('input', e => {
     UI.showSearchedBooks(e.target)
 })
 
-// Event: Add Book
-document.querySelector('#add-book-btn').addEventListener('click', e => {
-    // Prevent Actual Submit
-    e.preventDefault()
+// Event: Show Modal to Add a Book
+document.querySelector('#add-book-btn').addEventListener('click', () => {
+    // Change the modal title
+    document.querySelector('[modal-title]').innerHTML = 'Add Book'
 
-    // Get form values
-    const title = document.querySelector('#title').value
-    const author = document.querySelector('#author').value
-    const isbn = document.querySelector('#isbn').value
+    // Reset Form
+    UI.clearFields()
 
-    // Validate the fields
-    if(title === '' || author === '' || isbn === '') {
+    // Show the modal
+    UI.showModal('.modal-container')
+})
+
+// Event: Save a new or edited Book
+document.querySelector('.modal-actions .save').addEventListener('click', e => {
+    let noBooks = document.querySelector('tr.no-books')
+    const list = Store.getBooks()
+    const modalForm = document.querySelector('.modal-form')
+
+    const infos = {
+        title: modalForm.title.value,
+        author: modalForm.author.value,
+        isbn: modalForm.isbn.value
+    }
+
+    if(infos.title === '' || infos.author === '' || infos.isbn === '') {
         UI.showAlerts('Please Fill in all the fields', 'alert-danger')
-    } else {
+    }
+    // Verify the isbn size
+    else if(infos.isbn > 9999999) {
+        UI.showAlerts('The ISBN number is too big', 'alert-danger')
+    }
+    // Verify the Modal title to see if is a new book
+    else if(document.querySelector('[modal-title]').innerHTML === 'Add Book') {
 
-        // Create book object
-        const book = new Book(title, author, isbn)
+        // Create a new book object
+        const book = new Book(infos.title, infos.author, infos.isbn)
 
         // Verify if the isbn already exists
         if(Store.checkIsbn(book.isbn)) {
@@ -47,53 +74,23 @@ document.querySelector('#add-book-btn').addEventListener('click', e => {
 
             // Clear fields
             UI.clearFields()
+
+            // Close the modal
+            UI.closeModal('.modal-container')
+
+            // Vanish "No Books" message
+            noBooks.style.display = 'none'
         } 
         else {
             // Alert if the isbn already exists
             UI.showAlerts('Please change the isbn of the book', 'alert-danger')
         }
     }
-})
-
-// Event: Remove or Edit a Book
-document.querySelector('#book-list').addEventListener('click', e => {
-    
-    // Verify if the target is the delete button
-    if(e.target.title === 'Delete') {
-        // Remove Book from UI
-        UI.deleteBook(e.target)
-
-        // Remove Book from store
-        Store.removeBook(e.target.parentElement.previousElementSibling.textContent)
-
-        // Show success message
-        UI.showAlerts('Book Removed with success!', 'alert-success')
-    }
-    //Verify if the target is the edit button
-    else if(e.target.title === 'Edit') {
-        // Show the modal
-        UI.showModal('.modal-container')
-        // Change the modal title
-        document.querySelector('[modal-title]').innerHTML = 'Edit Book'
-        // Open the modal for editing the book
-        UI.editBook(e.target)
-    }
-
-})
-
-//Event: Save edited Book
-document.querySelector('.modal-actions .save').addEventListener('click', e => {
-    const modalForm = document.querySelector('.modal-form')
-
-    if(modalForm.title.value === '' || modalForm.author.value === '' || modalForm.isbn.value === '') {
-        UI.showAlerts('Please Fill in all the fields', 'alert-danger')
-    } 
     else {
-        const list = Store.getBooks()
         const tds = UI.findTdsText()
 
         // Verify if the isbn of the book already exists or it's did not has changed
-        if(Store.checkIsbn(modalForm.isbn.value) || tds[2] === modalForm.isbn.value) {
+        if(Store.checkIsbn(infos.isbn) || tds[2] === infos.isbn) {
 
             // Find the index of the edited book
             const i = Store.findBookIndex(tds[2])
@@ -115,6 +112,35 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
 
         }
     }
+})
+
+// Event: Remove or Edit a Book
+document.querySelector('#book-list').addEventListener('click', e => {
+    
+    // Verify if the target is the delete button
+    if(e.target.title === 'Delete') {
+        // Remove Book from UI
+        UI.deleteBook(e.target)
+
+        // Remove Book from store
+        Store.removeBook(e.target.parentElement.previousElementSibling.textContent)
+
+        // Show success message
+        UI.showAlerts('Book Removed with success!', 'alert-success')
+
+        // If don't has any book show "No books" message
+        document.querySelector('.no-books').style.display = (Store.getBooks().length === 0) ? '' : 'none';
+    }
+    //Verify if the target is the edit button
+    else if(e.target.title === 'Edit') {
+        // Show the modal
+        UI.showModal('.modal-container')
+        // Change the modal title
+        document.querySelector('[modal-title]').innerHTML = 'Edit Book'
+        // Open the modal for editing the book
+        UI.editBook(e.target)
+    }
+
 })
 
 //Event: Cancel Edited Book

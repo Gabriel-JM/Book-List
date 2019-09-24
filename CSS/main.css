@@ -11,6 +11,8 @@
     --modal-bg: white;
     --modal-divide-line: rgba(0, 0, 0, 0.3);
     --hover-save: #084;
+    --table-header: #a8a8a8;
+    --table-background: #595959;
 }
 
 /* Alterações Genéricas */
@@ -35,7 +37,7 @@ table {
     width: var(--content-size);
     margin: auto;
     margin-top: 10px;
-    background-color: #595959;
+    background-color: var(--table-background);
     border-radius: 3px;
     box-sizing: border-box;
 }
@@ -48,7 +50,7 @@ table td {
 thead th {
     width: 25%;
     padding: 8px;
-    background-color: #a8a8a8;
+    background-color: var(--table-header);
 }
 
 thead th:first-child {
@@ -60,11 +62,7 @@ thead th:last-child {
 }
 
 tbody tr {
-    background-color: #e4e4e4;
-}
-
-tbody tr:nth-child(odd) {
-    background-color: white;
+    background-color: #f5f5f5;
 }
 
 /* Classes */
@@ -92,9 +90,8 @@ tbody tr:nth-child(odd) {
     font-weight: 500;
     border: none;
     border-radius: 4px;
-    padding: 8px;
+    padding: 8px 12px;
     cursor: pointer;
-    width: 15%;
 }
 
 .btn-delete {
@@ -163,6 +160,14 @@ tbody tr:nth-child(odd) {
     background-color: var(--ok-green);
 }
 
+.no-books td {
+    display: '';
+    background-color: var(--table-background);
+    height: 50px;
+    color: var(--semi-white);
+    box-sizing: border-box;
+}
+
 /* Modal Style */
 .modal-container {
     position: fixed;
@@ -182,11 +187,11 @@ tbody tr:nth-child(odd) {
 .modal {
     background-color: var(--modal-bg);
     padding: 26px;
-    border-radius: 6px;
+    border-radius: 2px;
     width: 55vw;
     box-sizing: border-box;
     border: 5px solid var(--blue);
-    box-shadow: 0px 0px 0px 7px white,
+    box-shadow: 0px 0px 0px 5px white,
         0px 0px 7px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
     animation: drop-down 0.5s;
@@ -275,9 +280,17 @@ tbody tr:nth-child(odd) {
 }
 
 #main > h1 {
+    width: var(--content-size);
     font-size: 3rem;
     font-weight: 100;
     text-align: center;
+    margin: auto;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(50, 50, 50, 0.3);
+}
+
+#main > section {
+    margin-top: 30px;
 }
 
 #main-book-icon {

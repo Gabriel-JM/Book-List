@@ -37,6 +37,14 @@ class UI {
         }
     }
 
+    static showNoBookMessage() {
+        document.querySelector('tr.no-books').style.display = ''
+    }
+
+    static hideNoBookMessage() {
+        document.querySelector('tr.no-books').style.display = 'none'
+    }
+
     static showModal(modal) {
         document.querySelector(modal).style.display = 'grid'
     }
@@ -60,7 +68,7 @@ class UI {
     }
 
     static clearFields() {
-        document.querySelector('#book-form').reset()
+        document.querySelector('.modal-form').reset()
     }
 
     static showAlerts(message, className) {
@@ -98,13 +106,23 @@ class UI {
     static showSearchedBooks(input) {
         const bookTable = document.getElementById('book-list')
         let title = ''
+        let noResult = true
         for(let i=0; i<bookTable.children.length; i++) {
             title = bookTable.children[i].cells[0].innerHTML;
-            if(!RegExp(input.value.toLowerCase()).test(title.toLowerCase()) && input.value !== '') {
-                bookTable.children[i].style.display = 'none'
-            } else {
-                bookTable.children[i].style.display =  '';
+            if(bookTable.children[i].className !== 'no-books') {
+                if(!RegExp(input.value.toLowerCase()).test(title.toLowerCase()) && input.value !== '') {
+                    bookTable.children[i].style.display = 'none'
+                } else {
+                    noResult = false
+                    bookTable.children[i].style.display =  ''
+                }
             }
+        }
+
+        if(noResult) {
+            this.showNoBookMessage()
+        } else {
+            this.hideNoBookMessage()
         }
     }
 

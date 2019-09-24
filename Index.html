@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="CSS/main.css">
+    <link rel="shortcut icon" href="Icon/book.ico">
     <script src="https://kit.fontawesome.com/ff72ac0d30.js"></script>
     <title>My Book List</title>
 </head>
@@ -12,15 +13,7 @@
     <div id="main">
         <h1><i class="fas fa-book-open blue"></i> My<span class="blue">Book</span>List</h1>
 
-        <section id="main-section">
-            <form id="book-form">
-                <label>Title<input type="text" id="title" class="input-block"></label>
-
-                <label>Author<input type="text" id="author" class="input-block"></label>
-
-                <label>ISBN#<input type="number" id="isbn" class="input-block"></label>
-            </form>
-
+        <section>
             <div class="div-actions">
                 <button id="add-book-btn" class="btn-add">Add Book</button>
                 <input type="search" search-input placeholder="Search...">
@@ -36,7 +29,9 @@
                     </tr>
                 </thead>
                 <tbody id="book-list">
-                    
+                    <tr class="no-books">
+                        <td colspan="4">No Book Available.</td>
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -48,13 +43,13 @@
             <div class="modal-header">
                 <h3 modal-title></h3>
             </div>
-            <form class="modal-form">
+            <form class="modal-form" id="teste">
                 <label>Title
-                    <input type="text" name="title">
+                    <input type="text" name="title" maxlength="30">
                 </label>
 
                 <label>Author
-                    <input type="text" name="author">
+                    <input type="text" name="author" maxlength="30">
                 </label>
 
                 <label>ISBN#
