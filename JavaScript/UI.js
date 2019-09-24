@@ -109,7 +109,7 @@ class UI {
         let noResult = true
         for(let i=0; i<bookTable.children.length; i++) {
             title = bookTable.children[i].cells[0].innerHTML;
-            if(bookTable.children[i].className !== 'no-books') {
+            if(title !== 'No Book Available.') {
                 if(!RegExp(input.value.toLowerCase()).test(title.toLowerCase()) && input.value !== '') {
                     bookTable.children[i].style.display = 'none'
                 } else {
