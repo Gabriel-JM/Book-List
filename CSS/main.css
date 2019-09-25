@@ -156,7 +156,7 @@ tbody tr {
     text-align: center;
     color: white;
     border-radius: 3px;
-    animation: show 3s ease-out;
+    animation: show 3000ms ease-out;
 }
 
 .alert-danger {

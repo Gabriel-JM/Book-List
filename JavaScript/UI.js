@@ -82,7 +82,7 @@ class UI {
         // Vanish in 3 seconds
         setTimeout(() => {
             document.querySelector('.alert').remove()
-        }, 3000)
+        }, 2990)
     }
 
     // Grab the text inside of each table cell of the line
