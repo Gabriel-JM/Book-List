@@ -7,7 +7,7 @@
 /* Variáveis */
 :root {
     font-size: 17px;
-    --blue: #3299ff;
+    --blue: #0088cc;
     --semi-white: #eee;
     --semi-black: #333;
     --content-size: 80vw;
@@ -87,6 +87,7 @@ tbody tr {
 .actions {
     display: flex;
     justify-content: center;
+    align-content: space-around;
 }
 
 .btn-add {
@@ -98,6 +99,13 @@ tbody tr {
     border-radius: 4px;
     padding: 8px 12px;
     cursor: pointer;
+}
+
+.btn-add::before {
+    content: '+';
+    font-weight: bolder;
+    margin-right: 4px;
+    font-family: Byom Icons;
 }
 
 .btn-delete {
@@ -392,8 +400,12 @@ tbody tr {
         width: 95%;
     }
 
-    table td:last-child {
-        flex-direction: column;
+    td.actions {
+        flex-wrap: wrap;
+    }
+
+    td.actions a {
+        margin: 5px auto;
     }
 
     .alert {
