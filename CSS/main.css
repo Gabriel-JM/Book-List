@@ -299,13 +299,20 @@ tbody tr {
 }
 
 #main > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: var(--content-size);
     font-size: 3rem;
     font-weight: 100;
-    text-align: center;
     margin: auto;
     padding-bottom: 25px;
     border-bottom: 1px solid rgba(50, 50, 50, 0.3);
+}
+
+#main > h1 > img {
+    width: 65px;
+    margin-right: 20px;
 }
 
 #main > section {
