@@ -7,6 +7,8 @@ class Book {
     }
 }
 
+let currentPage = 1
+
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', () => {
     // If has no book show the "No book" message
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.showNoBookMessage()
     } else {
         UI.hideNoBookMessage()
-        UI.displayBooks()
+        UI.displayBooks(currentPage)
     }
 })
 
@@ -129,7 +131,11 @@ document.querySelector('#book-list').addEventListener('click', e => {
         UI.showAlerts('Book Removed with success!', 'alert-success')
 
         // If don't has any book show "No books" message
-        document.querySelector('.no-books').style.display = (Store.getBooks().length === 0) ? '' : 'none';
+        if(Store.getBooks().length === 0) {
+            document.querySelector('.no-books').style.display = ''
+        } else {
+            UI.reDisplayBooks = currentPage
+        }
     }
     //Verify if the target is the edit button
     else if(e.target.title === 'Edit') {

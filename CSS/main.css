@@ -164,7 +164,7 @@ tbody tr {
     text-align: center;
     color: white;
     border-radius: 3px;
-    animation: show 3000ms ease-out;
+    animation: show 3s ease-out;
 }
 
 .alert-danger {
@@ -193,6 +193,14 @@ tbody tr {
     content: 'E';
     font-family: Byom Icons;
     font-weight: bold;
+}
+
+.pagination-container {
+    width: 80vw;
+    margin: auto;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
 }
 
 /* Modal Style */

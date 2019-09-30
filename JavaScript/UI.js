@@ -5,14 +5,18 @@ class UI {
         this.tr
     }
 
-    static displayBooks() {
-        const books = Store.getBooks()
-        books.forEach(book => UI.addBookToList(book))
+    static displayBooks(currentPage) {
+        let books = Store.getBooks()
+        books.forEach((book, index) => {
+            if(index + 1 >= (6 * currentPage) - 6 + 1 && index + 1 <= currentPage * 6) {
+                UI.addBookToList(book)
+            }
+        })
     }
 
-    static reDisplayBooks() {
+    static reDisplayBooks(currentPage) {
         document.querySelector('#book-list').innerHTML = ''
-        this.displayBooks()
+        this.displayBooks(currentPage)
     }
 
     static addBookToList(book) {
