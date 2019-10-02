@@ -66,4 +66,8 @@ class Store {
         return index
     }
 
+    static getBooksArrayLength() {
+        return Math.ceil(this.getBooks().length / 6)
+    }
+
 }

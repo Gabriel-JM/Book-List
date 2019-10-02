@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.hideNoBookMessage()
         UI.displayBooks(currentPage)
     }
+
+    // Set pagination current page number
+    document.querySelector('[current-page]').innerHTML = currentPage
+
+    console.log(Store.getBooksArrayLength())
 })
 
 // Event: Search Books
@@ -74,7 +79,7 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
             // Show success message
             UI.showAlerts('Book Added with success!', 'alert-success')
 
-            // Clear fields
+            // Clear modal input fields
             UI.clearFields()
 
             // Close the modal
@@ -104,7 +109,7 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
             Store.rePostBooks(list)
 
              // Re display the books, close the modal and show success message
-            UI.reDisplayBooks()
+            UI.reDisplayBooks(currentPage)
             UI.closeModal('.modal-container')
             UI.showAlerts('Book edited with success!', 'alert-success')
         }
@@ -134,15 +139,17 @@ document.querySelector('#book-list').addEventListener('click', e => {
         if(Store.getBooks().length === 0) {
             document.querySelector('.no-books').style.display = ''
         } else {
-            UI.reDisplayBooks = currentPage
+            UI.reDisplayBooks(currentPage)
         }
     }
     //Verify if the target is the edit button
     else if(e.target.title === 'Edit') {
         // Show the modal
         UI.showModal('.modal-container')
+
         // Change the modal title
         document.querySelector('[modal-title]').innerHTML = 'Edit Book'
+
         // Open the modal for editing the book
         UI.editBook(e.target)
     }
@@ -150,7 +157,9 @@ document.querySelector('#book-list').addEventListener('click', e => {
 })
 
 //Event: Cancel Edited Book
-document.querySelector('.modal-actions .cancel').addEventListener('click', () => UI.closeModal('.modal-container'))
+document.querySelector('.modal-actions .cancel').addEventListener('click', () => {
+    UI.closeModal('.modal-container')
+})
 
 // Event: Close modal
 document.querySelector('.modal-container').addEventListener('click', e => {
@@ -159,5 +168,20 @@ document.querySelector('.modal-container').addEventListener('click', e => {
     if(e.target.className === "modal-container") {
         UI.closeModal('.modal-container')
     } 
+})
 
+// Event: Next page of pagination
+document.querySelector('[next-page]').addEventListener('click', () => {
+    currentPage += 1
+    document.querySelector('[current-page]').innerHTML = currentPage
+    UI.reDisplayBooks(currentPage)
+})
+
+// Event: Previous page of pagination
+document.querySelector('[previous-page]').addEventListener('click', () => {
+    if(currentPage > 1) {
+        currentPage -= 1
+        document.querySelector('[current-page]').innerHTML = currentPage
+        UI.reDisplayBooks(currentPage)
+    }
 })
