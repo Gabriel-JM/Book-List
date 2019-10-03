@@ -203,6 +203,18 @@ tbody tr {
     justify-content: center;
 }
 
+.pagination button {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.pagination button:first-child {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 /* Modal Style */
 .modal-container {
     position: fixed;

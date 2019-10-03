@@ -66,7 +66,7 @@ class Store {
         return index
     }
 
-    static getBooksArrayLength() {
+    static getBooksMaxPagination() {
         return Math.ceil(this.getBooks().length / 6)
     }
 

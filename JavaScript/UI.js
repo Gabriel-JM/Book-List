@@ -35,18 +35,27 @@ class UI {
         list.appendChild(row)
     }
 
+    static addNoBookMessage() {
+        const list = document.querySelector('#book-list')
+
+        const row = document.createElement('tr')
+        row.className = 'no-books'
+        row.innerHTML = '<td colspan="4">No Book Available.</td>'
+
+        list.appendChild(row)
+    }
+
     static deleteBook(el) {
         if(el.classList.contains('btn-delete')) {
             el.parentElement.parentElement.remove()
         }
     }
 
-    static showNoBookMessage() {
-        document.querySelector('tr.no-books').style.display = ''
-    }
-
     static hideNoBookMessage() {
-        document.querySelector('tr.no-books').style.display = 'none'
+        let message = document.querySelector('tr.no-books') 
+        if(message) {
+            message.remove()
+        }
     }
 
     static showModal(modal) {
@@ -124,7 +133,7 @@ class UI {
         }
 
         if(noResult) {
-            this.showNoBookMessage()
+            this.addNoBookMessage()
         } else {
             this.hideNoBookMessage()
         }

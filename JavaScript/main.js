@@ -69,10 +69,6 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
 
         // Verify if the isbn already exists
         if(Store.checkIsbn(book.isbn)) {
-
-            // Add the new Book to UI
-            UI.addBookToList(book)
-
             // Add the book to the store
             Store.addBook(book)
 
@@ -84,6 +80,9 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
 
             // Close the modal
             UI.closeModal('.modal-container')
+
+            // Add the new Book to UI
+            UI.reDisplayBooks(currentPage)
 
             // Vanish "No Books" message
             noBooks.style.display = 'none'
@@ -172,9 +171,11 @@ document.querySelector('.modal-container').addEventListener('click', e => {
 
 // Event: Next page of pagination
 document.querySelector('[next-page]').addEventListener('click', () => {
-    currentPage += 1
-    document.querySelector('[current-page]').innerHTML = currentPage
-    UI.reDisplayBooks(currentPage)
+    if(currentPage < Store.getBooksMaxPagination()) {
+        currentPage += 1
+        document.querySelector('[current-page]').innerHTML = currentPage
+        UI.reDisplayBooks(currentPage)
+    }
 })
 
 // Event: Previous page of pagination
