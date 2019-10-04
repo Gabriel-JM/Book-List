@@ -12,7 +12,7 @@
     --semi-black: #333;
     --content-size: 80vw;
     --danger-red: rgb(221, 87, 87);
-    --ok-green: #61bb71;
+    --ok-green: #61aa71;
     --modal-cont-bg: rgba(0, 0, 0, 0.25);
     --modal-bg: white;
     --modal-divide-line: rgba(0, 0, 0, 0.3);
@@ -73,6 +73,10 @@ tbody tr {
 
 /* Classes */
 .blue { color: var(--blue); }
+
+.left-arrow {
+    transform: rotate(180deg);
+}
 
 .input-block {
     display: block;
@@ -198,21 +202,31 @@ tbody tr {
 .pagination-container {
     width: 80vw;
     margin: auto;
-    margin-top: 15px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 }
 
-.pagination button {
-    background-color: white;
-    padding: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+.pagination {
+    background-color: var(--blue);
+    border-radius: 6px;
 }
 
-.pagination button:first-child {
+.pagination button {
+    margin: 0;
+    font-size: 18px;
     background-color: white;
-    padding: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 3px 8px;
+    border: solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    border-width: 1px 1px 1px 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pagination span {
+    color: white;
+    padding: 0 3px;
 }
 
 /* Modal Style */
@@ -300,7 +314,7 @@ tbody tr {
     width: 49%;
     font-size: 1rem;
     padding: 8px 0px;
-    background: #ccc;
+    background: #bbb;
     color: white;
     border: 0;
     cursor: pointer;
@@ -318,7 +332,7 @@ tbody tr {
 }
 
 .modal-actions button.cancel:hover {
-    background-color: #aaa;
+    background-color: #999;
 }
 
 /* Alterações especificas */

@@ -13,16 +13,14 @@ let currentPage = 1
 document.addEventListener('DOMContentLoaded', () => {
     // If has no book show the "No book" message
     if(Store.getBooks().length === 0) {
-        UI.showNoBookMessage()
+        UI.addNoBookMessage()
     } else {
         UI.hideNoBookMessage()
         UI.displayBooks(currentPage)
     }
 
     // Set pagination current page number
-    document.querySelector('[current-page]').innerHTML = currentPage
-
-    console.log(Store.getBooksArrayLength())
+    UI.setPaginationCurrentPage(currentPage)
 })
 
 // Event: Search Books
@@ -81,11 +79,17 @@ document.querySelector('.modal-actions .save').addEventListener('click', e => {
             // Close the modal
             UI.closeModal('.modal-container')
 
+            // Verify if the next book go to a new page
+            if(Store.getBooksMaxPagination() !== currentPage) {
+                currentPage = Store.getBooksMaxPagination()
+                UI.setPaginationCurrentPage(currentPage)
+            }
+
             // Add the new Book to UI
             UI.reDisplayBooks(currentPage)
 
             // Vanish "No Books" message
-            noBooks.style.display = 'none'
+            UI.hideNoBookMessage()
         } 
         else {
             // Alert if the isbn already exists
@@ -133,13 +137,15 @@ document.querySelector('#book-list').addEventListener('click', e => {
 
         // Show success message
         UI.showAlerts('Book Removed with success!', 'alert-success')
-
-        // If don't has any book show "No books" message
-        if(Store.getBooks().length === 0) {
-            document.querySelector('.no-books').style.display = ''
-        } else {
-            UI.reDisplayBooks(currentPage)
+        
+        // If don't has any book in current page, go to the previous
+        if(Store.getBooksMaxPagination() < currentPage && currentPage !== 1) {
+            currentPage -= 1
+            UI.setPaginationCurrentPage(currentPage)
         }
+
+        UI.reDisplayBooks(currentPage)
+        
     }
     //Verify if the target is the edit button
     else if(e.target.title === 'Edit') {

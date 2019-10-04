@@ -12,6 +12,10 @@ class UI {
                 UI.addBookToList(book)
             }
         })
+
+        if(!books.length) {
+            this.addNoBookMessage()
+        }
     }
 
     static reDisplayBooks(currentPage) {
@@ -137,6 +141,10 @@ class UI {
         } else {
             this.hideNoBookMessage()
         }
+    }
+
+    static setPaginationCurrentPage(number) {
+        document.querySelector('[current-page]').innerHTML = number
     }
 
 }
