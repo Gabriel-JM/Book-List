@@ -11,7 +11,6 @@ let currentPage = 1
 
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', () => {
-    // If has no book show the "No book" message
     if(Store.getBooks().length === 0) {
         UI.addNoBookMessage()
     } else {
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.displayBooks(currentPage)
     }
 
-    // Set pagination current page number
     UI.setPaginationCurrentPage(currentPage)
 })
 
@@ -33,10 +31,8 @@ document.querySelector('#add-book-btn').addEventListener('click', () => {
     // Change the modal title
     document.querySelector('[modal-title]').innerHTML = 'Add Book'
 
-    // Reset Form
     UI.clearFields()
 
-    // Show the modal
     UI.showModal('.modal-container')
 })
 
@@ -54,17 +50,16 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
         isbn: modalForm.isbn.value
     }
 
-    if(infos.title === '' || infos.author === '' || infos.isbn === '') {
+    if(UI.isAnyFieldEmpty(modalForm)) {
         UI.showAlerts('Please Fill in all the fields', 'alert-danger')
     }
     // Verify the isbn size
-    else if(infos.isbn > 9999999) {
+    else if(infos.isbn > 999999999) {
         UI.showAlerts('The ISBN number is too big', 'alert-danger')
     }
     // Verify the Modal title to see if is a new book
     else if(document.querySelector('[modal-title]').innerHTML === 'Add Book') {
 
-        // Create a new book object
         const book = new Book(infos.title, infos.author, infos.isbn)
 
         // Verify if the isbn already exists
@@ -75,10 +70,8 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
             // Show success message
             UI.showAlerts('Book Added with success!', 'alert-success')
 
-            // Clear modal input fields
             UI.clearFields()
 
-            // Close the modal
             UI.closeModal('.modal-container')
 
             // Verify if the next book go to a new page
@@ -87,10 +80,8 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
                 UI.setPaginationCurrentPage(currentPage)
             }
 
-            // Add the new Book to UI
             UI.reDisplayBooks(currentPage)
 
-            // Vanish "No Books" message
             UI.hideNoBookMessage()
         } 
         else {
@@ -131,10 +122,8 @@ document.querySelector('#book-list').addEventListener('click', e => {
     
     // Verify if the target is the delete button
     if(e.target.title === 'Delete') {
-        // Remove Book from UI
         UI.deleteBook(e.target)
 
-        // Remove Book from store
         Store.removeBook(e.target.parentElement.previousElementSibling.textContent)
 
         // Show success message

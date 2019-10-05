@@ -99,6 +99,12 @@ class UI {
         document.querySelector('.modal-form').reset()
     }
 
+    static isAnyFieldEmpty(form) {
+        const [title, author, isbn] = form
+
+        return (title.value === '' || author.value === '' || isbn.value === '')
+    }
+
     static showAlerts(message, className) {
         const div = document.createElement('div')
         div.className = `alert ${className}`
@@ -133,24 +139,25 @@ class UI {
 
     static showSearchedBooks(input, currentPage) {
         const books = this.currentPageBooks
-        let result = 0
 
-        if(!RegExp(/\s+/).test(input.value)) {
-            result = books.filter(({ title }) => (
+        if(!RegExp(/\s/).test(input.value)) {
+            let result = books.filter(({ title }) => (
                 RegExp(input.value.toLowerCase()).test(title.toLowerCase()) &&
                 input.value !== '')
             )
+
+            if(!result.length && input.value !== '') {
+                this.removeList()
+                this.addNoBookMessage()
+            } else if(input.value === '') {
+                this.reDisplayBooks(currentPage)
+            } else {
+                this.hideNoBookMessage()
+                this.reDisplayBooks(currentPage, result)
+            }
         }
 
-        if(!result.length && input.value !== '') {
-            this.removeList()
-            this.addNoBookMessage()
-        } else if(input.value === '') {
-            this.reDisplayBooks(currentPage)
-        } else {
-            this.hideNoBookMessage()
-            this.reDisplayBooks(currentPage, result)
-        }
+        
     }
 
     static setPaginationCurrentPage(number) {
