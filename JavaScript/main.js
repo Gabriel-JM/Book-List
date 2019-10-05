@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Event: Search Books
 document.querySelector('[search-input]').addEventListener('input', e => {
-    UI.showSearchedBooks(e.target)
+    UI.showSearchedBooks(e.target, currentPage)
 })
 
 // Event: Show Modal to Add a Book
@@ -41,7 +41,9 @@ document.querySelector('#add-book-btn').addEventListener('click', () => {
 })
 
 // Event: Save a new or edited Book
-document.querySelector('.modal-actions .save').addEventListener('click', e => {
+document.querySelector('.modal-form').addEventListener('submit', e => {
+    e.preventDefault()
+
     let noBooks = document.querySelector('tr.no-books')
     const list = Store.getBooks()
     const modalForm = document.querySelector('.modal-form')
@@ -162,7 +164,8 @@ document.querySelector('#book-list').addEventListener('click', e => {
 })
 
 //Event: Cancel Edited Book
-document.querySelector('.modal-actions .cancel').addEventListener('click', () => {
+document.querySelector('.modal-actions .cancel').addEventListener('click', e => {
+    e.preventDefault()
     UI.closeModal('.modal-container')
 })
 

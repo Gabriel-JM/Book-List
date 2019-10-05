@@ -2,25 +2,35 @@
 class UI {
 
     constructor() {
-        this.tr
+        this.tr,
+        this.currentPageBooks = []
     }
 
-    static displayBooks(currentPage) {
+    static displayBooks(currentPage, list = null) {
         let books = Store.getBooks()
-        books.forEach((book, index) => {
-            if(index + 1 >= (6 * currentPage) - 6 + 1 && index + 1 <= currentPage * 6) {
-                UI.addBookToList(book)
-            }
-        })
 
         if(!books.length) {
             this.addNoBookMessage()
+        } else if(list){
+            list.forEach(book => this.addBookToList(book))
+        } else {
+            this.currentPageBooks = books.filter((book, index) => {
+                if(index + 1 >= (6 * currentPage) - 6 + 1 && index + 1 <= currentPage * 6) {
+                    return book
+                } 
+            })
+
+            this.currentPageBooks.forEach(book => this.addBookToList(book))
         }
     }
 
-    static reDisplayBooks(currentPage) {
+    static reDisplayBooks(currentPage, list = null) {
+        this.removeList()
+        list ? this.displayBooks(currentPage, list) : this.displayBooks(currentPage)
+    }
+
+    static removeList() {
         document.querySelector('#book-list').innerHTML = ''
-        this.displayBooks(currentPage)
     }
 
     static addBookToList(book) {
@@ -40,13 +50,15 @@ class UI {
     }
 
     static addNoBookMessage() {
-        const list = document.querySelector('#book-list')
+        if(!document.querySelector('#book-list tr.no-books')) {
+            const list = document.querySelector('#book-list')
 
-        const row = document.createElement('tr')
-        row.className = 'no-books'
-        row.innerHTML = '<td colspan="4">No Book Available.</td>'
+            const row = document.createElement('tr')
+            row.className = 'no-books'
+            row.innerHTML = '<td colspan="4">No Book Available.</td>'
 
-        list.appendChild(row)
+            list.appendChild(row)
+        }
     }
 
     static deleteBook(el) {
@@ -56,10 +68,9 @@ class UI {
     }
 
     static hideNoBookMessage() {
-        let message = document.querySelector('tr.no-books') 
-        if(message) {
-            message.remove()
-        }
+        let message = document.querySelector('tr.no-books')
+
+        if(message) message.remove()
     }
 
     static showModal(modal) {
@@ -120,26 +131,25 @@ class UI {
 
     }
 
-    static showSearchedBooks(input) {
-        const bookTable = document.getElementById('book-list')
-        let title = ''
-        let noResult = true
-        for(let i=0; i<bookTable.children.length; i++) {
-            title = bookTable.children[i].cells[0].innerHTML;
-            if(title !== 'No Book Available.') {
-                if(!RegExp(input.value.toLowerCase()).test(title.toLowerCase()) && input.value !== '') {
-                    bookTable.children[i].style.display = 'none'
-                } else {
-                    noResult = false
-                    bookTable.children[i].style.display =  ''
-                }
-            }
+    static showSearchedBooks(input, currentPage) {
+        const books = this.currentPageBooks
+        let result = 0
+
+        if(!RegExp(/\s+/).test(input.value)) {
+            result = books.filter(({ title }) => (
+                RegExp(input.value.toLowerCase()).test(title.toLowerCase()) &&
+                input.value !== '')
+            )
         }
 
-        if(noResult) {
+        if(!result.length && input.value !== '') {
+            this.removeList()
             this.addNoBookMessage()
+        } else if(input.value === '') {
+            this.reDisplayBooks(currentPage)
         } else {
             this.hideNoBookMessage()
+            this.reDisplayBooks(currentPage, result)
         }
     }
 
