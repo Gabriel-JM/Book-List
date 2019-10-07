@@ -179,6 +179,7 @@ tbody td:not([colspan]):last-child {
     color: white;
     border-radius: 3px;
     animation: show 3s ease-out;
+    animation-fill-mode: backwards;
 }
 
 .alert-danger {
@@ -360,6 +361,10 @@ tr.no-books td {
     background-color: #999;
 }
 
+.fade-out {
+    animation: fade-out 500ms;
+}
+
 /* Alterações especificas */
 #main {
     margin: 20px;
@@ -408,6 +413,15 @@ tr.no-books td {
     }
 }
 
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes drop-down {
     from {
         transform: translateY(-30px);
@@ -418,17 +432,11 @@ tr.no-books td {
 }
 
 @keyframes show {
-    0% {
-        transform: translateX(125%);
+    0%, 100% {
+        transform: translateX(120%);
     }
-    25% {
+    20%, 80% {
         transform: translateX(0px);
-    }
-    75% {
-        transform: translateX(0px);
-    }
-    100% {
-        transform: translateX(125%);
     }
 }
 

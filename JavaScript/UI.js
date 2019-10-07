@@ -77,8 +77,12 @@ class UI {
         document.querySelector(modal).style.display = 'grid'
     }
 
-    static closeModal(el) {
-        document.querySelector(el).style.display = 'none'
+    static closeModal(modal) {
+        document.querySelector(modal).style.display = 'none'
+    }
+
+    static fadeModal(modal) {
+        document.querySelector(modal).classList.add('fade-out')
     }
 
     static editBook(el) {

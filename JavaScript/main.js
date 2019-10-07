@@ -72,13 +72,13 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
 
             UI.clearFields()
 
-            UI.closeModal('.modal-container')
-
             // Verify if the next book go to a new page
             if(Store.getBooksMaxPagination() !== currentPage) {
                 currentPage = Store.getBooksMaxPagination()
                 UI.setPaginationCurrentPage(currentPage)
             }
+
+            UI.fadeModal('.modal-container')
 
             UI.reDisplayBooks(currentPage)
 
@@ -106,7 +106,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
 
              // Re display the books, close the modal and show success message
             UI.reDisplayBooks(currentPage)
-            UI.closeModal('.modal-container')
+            UI.fadeModal('.modal-container')
             UI.showAlerts('Book edited with success!', 'alert-success')
         }
         else {
@@ -152,18 +152,17 @@ document.querySelector('#book-list').addEventListener('click', e => {
 
 })
 
-//Event: Cancel Edited Book
+//Event: Cancel Editing/adding Book
 document.querySelector('.modal-actions .cancel').addEventListener('click', e => {
     e.preventDefault()
-    UI.closeModal('.modal-container')
+    document.querySelector('.modal-container').classList.add('fade-out')
 })
 
-// Event: Close modal
-document.querySelector('.modal-container').addEventListener('click', e => {
-
-    // Verify if the target is the modal container
-    if(e.target.className === "modal-container") {
+// Event: Close Modal
+document.querySelector('.modal-container').addEventListener('animationend', e => {
+    if(e.animationName === 'fade-out') {
         UI.closeModal('.modal-container')
+        document.querySelector('.modal-container').classList.remove('fade-out')
     } 
 })
 
