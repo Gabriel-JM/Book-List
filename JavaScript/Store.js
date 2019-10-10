@@ -38,20 +38,12 @@ class Store {
     }
 
     // Verify if the book already exists
-    static checkIsbn(isbn) {
+    static isbnAlreadyExists(isbn) {
         
         // Catch the isbn of the stored books
         const storeIsbns = this.getBooks().map(e => e.isbn)
 
-        let result = true
-
-        storeIsbns.forEach(e => {
-            if(e === isbn) {
-                result = false
-            }
-        })
-
-        return result
+        return !storeIsbns.includes(isbn)
     }
 
     static findBookIndex(isbn) {

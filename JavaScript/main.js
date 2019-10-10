@@ -63,7 +63,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
         const book = new Book(infos.title, infos.author, infos.isbn)
 
         // Verify if the isbn already exists
-        if(Store.checkIsbn(book.isbn)) {
+        if(Store.isbnAlreadyExists(book.isbn)) {
             // Add the book to the store
             Store.addBook(book)
 
@@ -93,7 +93,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
         const tds = UI.findTdsText()
 
         // Verify if the isbn of the book already exists or it's did not has changed
-        if(Store.checkIsbn(infos.isbn) || tds[2] === infos.isbn) {
+        if(Store.isbnAlreadyExists(infos.isbn) || tds[2] === infos.isbn) {
 
             // Find the index of the edited book
             const i = Store.findBookIndex(tds[2])
