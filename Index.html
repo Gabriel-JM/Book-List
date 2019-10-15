@@ -33,9 +33,9 @@
 
             <div class="pagination-container">
                 <div class="pagination">
-                    <button previous-page title="Previous page">&#8810;</button>
+                    <button previous-page title="Previous page">&#xab;</button>
                     <span current-page></span>
-                    <button next-page title="Next page">&#8811;</button>
+                    <button next-page title="Next page">&#xbb;</button>
                 </div>
             </div>
         </section>
@@ -49,15 +49,15 @@
             </div>
             <form class="modal-form">
                 <label class="title">Title
-                    <input type="text" name="title" maxlength="30">
+                    <input type="text" name="title" maxlength="80" autocomplete="off">
                 </label>
 
                 <label class="author">Author
-                    <input type="text" name="author" maxlength="30">
+                    <input type="text" name="author" maxlength="80" autocomplete="off">
                 </label>
 
                 <label class="isbn">ISBN#
-                    <input type="number" name="isbn">
+                    <input type="text" name="isbn" maxlength="20" autocomplete="off">
                 </label>
                 
                 <div class="modal-actions">
@@ -71,6 +71,6 @@
 
     <script src="JavaScript/Store.js"></script>
     <script src="JavaScript/UI.js"></script>
-    <script src="JavaScript/main.js"></script>
+    <script src="./JavaScript/main.js"></script>
 </body>
 </html>

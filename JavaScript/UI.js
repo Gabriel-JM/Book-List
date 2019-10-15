@@ -103,10 +103,22 @@ class UI {
         document.querySelector('.modal-form').reset()
     }
 
+    static onlyNumbers(target) {
+        target.value = target.value.replace(/\D/, '')
+    }
+
     static isAnyFieldEmpty(form) {
         const [title, author, isbn] = form
 
-        return (title.value === '' || author.value === '' || isbn.value === '')
+        return (RegExp(/\s(?=\W)/).test(title.value) ||
+                RegExp(/\s(?=\W)/).test(title.value) ||
+                RegExp(/\s(?=\W)/).test(title.value))
+    }
+
+    static isAnyFieldOutOfLength(form) {
+        const [title, author, isbn] = form
+
+        return (title.value.length > 80 || author.value.length > 80 || isbn.value.length > 30)
     }
 
     static showAlerts(message, className) {

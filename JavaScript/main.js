@@ -36,6 +36,9 @@ document.querySelector('#add-book-btn').addEventListener('click', () => {
     UI.showModal('.modal-container')
 })
 
+//Event: Prevent letter on isbn input
+document.querySelector('.isbn').addEventListener('input', e => UI.onlyNumbers(e.target))
+
 // Event: Save a new or edited Book
 document.querySelector('.modal-form').addEventListener('submit', e => {
     e.preventDefault()
@@ -51,11 +54,11 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
     }
 
     if(UI.isAnyFieldEmpty(modalForm)) {
-        UI.showAlerts('Please Fill in all the fields', 'alert-danger')
+        UI.showAlerts('Please fill corretly all the fileds', 'alert-danger')
     }
     // Verify the isbn size
-    else if(infos.isbn > 999999999) {
-        UI.showAlerts('The ISBN number is too big', 'alert-danger')
+    else if(UI.isAnyFieldOutOfLength(modalForm)) {
+        UI.showAlerts('Please Fill the fields with the correct size', 'alert-danger')
     }
     // Verify the Modal title to see if is a new book
     else if(document.querySelector('[modal-title]').innerHTML === 'Add Book') {
