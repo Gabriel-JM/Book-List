@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.displayBooks(currentPage)
     }
 
-    UI.setPaginationCurrentPage(currentPage)
+    UI.displayPaginationPages(currentPage)
 })
 
 // Event: Search Books
@@ -78,7 +78,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
             // Verify if the next book go to a new page
             if(Store.getBooksMaxPagination() !== currentPage) {
                 currentPage = Store.getBooksMaxPagination()
-                UI.setPaginationCurrentPage(currentPage)
+                UI.displayPaginationPages(currentPage)
             }
 
             UI.fadeModal('.modal-container')
@@ -135,7 +135,7 @@ document.querySelector('#book-list').addEventListener('click', e => {
         // If don't has any book in current page, go to the previous
         if(Store.getBooksMaxPagination() < currentPage && currentPage !== 1) {
             currentPage -= 1
-            UI.setPaginationCurrentPage(currentPage)
+            UI.displayPaginationPages(currentPage)
         }
 
         UI.reDisplayBooks(currentPage)
@@ -173,7 +173,7 @@ document.querySelector('.modal-container').addEventListener('animationend', e =>
 document.querySelector('[next-page]').addEventListener('click', () => {
     if(currentPage < Store.getBooksMaxPagination()) {
         currentPage += 1
-        document.querySelector('[current-page]').innerHTML = currentPage
+        UI.displayPaginationPages(currentPage)
         UI.reDisplayBooks(currentPage)
     }
 })
@@ -182,7 +182,8 @@ document.querySelector('[next-page]').addEventListener('click', () => {
 document.querySelector('[previous-page]').addEventListener('click', () => {
     if(currentPage > 1) {
         currentPage -= 1
-        document.querySelector('[current-page]').innerHTML = currentPage
+        //document.querySelector('[current-page]').innerHTML = currentPage
+        UI.displayPaginationPages(currentPage)
         UI.reDisplayBooks(currentPage)
     }
 })

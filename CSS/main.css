@@ -55,33 +55,34 @@ table {
     box-sizing: border-box;
 }
 
-table td {
-    text-align: center;
-    padding: 5px;
-    word-wrap: break-word;
-    vertical-align: center;
-}
-
 thead th {
     width: 25%;
     padding: 8px;
     background-color: var(--table-header);
 }
 
-thead th:first-child {
-    width: 30%;
+thead th:last-child {
+   width: 12%;
 }
 
-thead th:last-child {
-   width: 15%;
+tbody td {
+    text-align: center;
+    padding: 5px;
+    word-wrap: break-word;
+    vertical-align: center;
+}
+
+tbody td:last-child > * {
+    font-size: 15px;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 tbody tr {
     background-color: #f5f5f5;
-}
-
-tbody td:not(:last-child) {
-    max-width: 25%;
 }
 
 tbody td:not([colspan]):last-child {
@@ -105,14 +106,6 @@ tbody td:not([colspan]):last-child {
     border: 1px solid rgba(50, 50, 50, 0.4);
     border-radius: 4px;
     box-sizing: border-box;
-}
-
-.actions > * {
-    color: white;
-    padding: 6px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .btn-add {
@@ -227,23 +220,30 @@ tr.no-books td {
 
 .pagination button {
     margin: 0;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bolder;
     background-color: white;
     padding: 0px 8px;
+    margin: 5px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     cursor: pointer;
     border-radius: 4px;
 }
 
-.pagination > span {
+.paginationCurrentPage {
     background: var(--blue);
     color: white;
     font-weight: bold;
     padding: 3px 10px;
-    margin: 0px 12px;
+    margin: 0px 5px;
     border: 2px solid var(--blue);
     border-radius: 4px;
+}
+
+.paginationPageNumber {
+    font-weight: bold;
+    padding: 3px 10px;
+    margin: 0 5px;
 }
 
 /* Modal Style */
@@ -445,6 +445,18 @@ tr.no-books td {
     .div-actions input {
         width: 40%;
     }
+
+    table {
+        width: 85vw;
+    }
+
+    table th {
+        width: 20%;
+    }
+
+    table th:last-child {
+        width: 22%;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -473,12 +485,12 @@ tr.no-books td {
         width: 95%;
     }
 
-    td.actions {
+    tbody td:last-child {
         padding: 3px;
         flex-wrap: wrap;
     }
 
-    td.actions a {
+    tbody td:last-child span {
         margin: 2px 0px;
     }
 

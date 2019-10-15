@@ -41,9 +41,9 @@ class UI {
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.isbn}</td>
-            <td class="actions">
-                <a href="#" class="btn-edit pencil" title="Edit"></a>
-                <a href="#" class="btn-delete trash" title="Delete"></a>
+            <td>
+                <span class="btn-edit pencil" title="Edit"></span>
+                <span class="btn-delete trash" title="Delete"></span>
             </td>`
 
         list.appendChild(row)
@@ -176,8 +176,15 @@ class UI {
         
     }
 
-    static setPaginationCurrentPage(number) {
-        document.querySelector('[current-page]').innerHTML = number
+    static displayPaginationPages(number) {
+        const pagination = document.querySelector('[current-page]')
+        pagination.innerHTML = ''
+
+        let className = ''
+        for(let i = 1; i <= Store.getBooksMaxPagination(); i++) {
+            className = i == number ? 'paginationCurrentPage' : 'paginationPageNumber'
+            pagination.innerHTML += `<span class=${className}>${i}</span>`
+        }
     }
 
 }
