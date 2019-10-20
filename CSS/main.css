@@ -12,11 +12,11 @@
     --semi-black: #333;
     --content-size: 80vw;
     --danger-red: rgb(221, 87, 87);
-    --ok-green: #61aa71;
+    --ok-green: #5caa5c;
+    --hover-save: #5c975c;
     --modal-cont-bg: rgba(0, 0, 0, 0.25);
     --modal-bg: white;
     --modal-divide-line: rgba(0, 0, 0, 0.3);
-    --hover-save: #084;
     --table-header: #a8a8a8;
     --table-background: #595959;
 }
@@ -29,7 +29,7 @@
 }
 
 body {
-    font-family: monospace, sans-serif;
+    font-family: sans-serif;
     box-sizing: border-box;
 }
 
@@ -185,9 +185,8 @@ tbody td:not([colspan]):last-child {
 
 tr.no-books td {
     display: '';
-    background-color: var(--table-background);
     height: 50px;
-    color: var(--semi-white);
+    font-weight: bold;
     box-sizing: border-box;
     justify-content: center;
 }
@@ -340,7 +339,7 @@ tr.no-books td {
     width: 48%;
     font-size: 1rem;
     padding: 8px 0px;
-    background: #bbb;
+    background: #a4a4a4;
     color: white;
     border: 0;
     cursor: pointer;
@@ -358,7 +357,7 @@ tr.no-books td {
 }
 
 .modal-actions button.cancel:hover {
-    background-color: #999;
+    background-color: #888;
 }
 
 .fade-out {

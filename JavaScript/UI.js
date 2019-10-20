@@ -110,9 +110,9 @@ class UI {
     static isAnyFieldEmpty(form) {
         const [title, author, isbn] = form
 
-        return (RegExp(/\s(?=\W)/).test(title.value) ||
-                RegExp(/\s(?=\W)/).test(title.value) ||
-                RegExp(/\s(?=\W)/).test(title.value))
+        return (RegExp(/^\s*$|\s+(?=\W)/).test(title.value) ||
+                RegExp(/^\s*$|\s+(?=\W)/).test(author.value) ||
+                RegExp(/^\s*$|\s+(?=\W)/).test(isbn.value))
     }
 
     static isAnyFieldOutOfLength(form) {
@@ -127,12 +127,10 @@ class UI {
         div.appendChild(document.createTextNode(message))
 
         document.body.appendChild(div)
-        div.style.transform = 'translateX(0px)'
 
-        // Vanish in 3 seconds
-        setTimeout(() => {
-            document.querySelector('.alert').remove()
-        }, 2990)
+        document.querySelectorAll('.alert').forEach( element => {
+            element.addEventListener('animationend', () => element.remove())
+        })
     }
 
     // Grab the text inside of each table cell of the line
@@ -157,7 +155,7 @@ class UI {
         const books = this.currentPageBooks
 
         if(!RegExp(/\s/).test(input.value)) {
-            let result = books.filter(({ title }) => (
+            const result = books.filter(({ title }) => (
                 RegExp(input.value.toLowerCase()).test(title.toLowerCase()) &&
                 input.value !== '')
             )

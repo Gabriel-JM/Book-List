@@ -54,7 +54,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
     }
 
     if(UI.isAnyFieldEmpty(modalForm)) {
-        UI.showAlerts('Please fill corretly all the fileds', 'alert-danger')
+        UI.showAlerts('Fill out all the fields', 'alert-danger')
     }
     // Verify the isbn size
     else if(UI.isAnyFieldOutOfLength(modalForm)) {
@@ -89,7 +89,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
         } 
         else {
             // Alert if the isbn already exists
-            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+            UI.showAlerts('This isbn already exists!', 'alert-danger')
         }
     }
     else {
@@ -114,7 +114,7 @@ document.querySelector('.modal-form').addEventListener('submit', e => {
         }
         else {
             // Alert if the isbn already exists
-            UI.showAlerts('Please change the isbn of the book', 'alert-danger')
+            UI.showAlerts('This isbn already exists!', 'alert-danger')
 
         }
     }
@@ -182,7 +182,6 @@ document.querySelector('[next-page]').addEventListener('click', () => {
 document.querySelector('[previous-page]').addEventListener('click', () => {
     if(currentPage > 1) {
         currentPage -= 1
-        //document.querySelector('[current-page]').innerHTML = currentPage
         UI.displayPaginationPages(currentPage)
         UI.reDisplayBooks(currentPage)
     }
