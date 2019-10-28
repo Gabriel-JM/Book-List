@@ -59,7 +59,7 @@ class Store {
     }
 
     static getBooksMaxPagination() {
-        return Math.ceil(this.getBooks().length / 6)
+        return Math.ceil(this.getBooks().length / 6) || 1
     }
 
 }

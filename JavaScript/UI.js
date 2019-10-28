@@ -183,6 +183,14 @@ class UI {
             className = i == number ? 'paginationCurrentPage' : 'paginationPageNumber'
             pagination.innerHTML += `<span class=${className}>${i}</span>`
         }
+
+        document.querySelectorAll('.paginationPageNumber').forEach(element => {
+            element.addEventListener('click', event => {
+                const number = event.target.innerText
+                UI.displayPaginationPages(number)
+                UI.reDisplayBooks(number)
+            })
+        })
     }
 
 }

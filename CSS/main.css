@@ -237,12 +237,14 @@ tr.no-books td {
     margin: 0px 5px;
     border: 2px solid var(--blue);
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .paginationPageNumber {
     font-weight: bold;
     padding: 3px 10px;
     margin: 0 5px;
+    cursor: pointer;
 }
 
 /* Modal Style */
