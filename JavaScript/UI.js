@@ -110,9 +110,9 @@ class UI {
     static isAnyFieldEmpty(form) {
         const [title, author, isbn] = form
 
-        return (RegExp(/^\s*$|\s+(?=\W)/).test(title.value) ||
-                RegExp(/^\s*$|\s+(?=\W)/).test(author.value) ||
-                RegExp(/^\s*$|\s+(?=\W)/).test(isbn.value))
+        return (RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(title.value) ||
+                RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(author.value) ||
+                RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(isbn.value))
     }
 
     static isAnyFieldOutOfLength(form) {

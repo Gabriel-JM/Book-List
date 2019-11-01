@@ -139,6 +139,7 @@ document.querySelector('#book-list').addEventListener('click', e => {
         }
 
         UI.reDisplayBooks(currentPage)
+        UI.displayPaginationPages(currentPage)
         
     }
     //Verify if the target is the edit button
