@@ -110,9 +110,9 @@ class UI {
     static isAnyFieldEmpty(form) {
         const [title, author, isbn] = form
 
-        return (RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(title.value) ||
-                RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(author.value) ||
-                RegExp(/^\s*$|\s+(?=\W[á-ú])/).test(isbn.value))
+        return (RegExp(/^\s*$|\s+(?=\s{1,2})/).test(title.value) ||
+                RegExp(/^\s*$|\s+(?=\s{1,2})/).test(author.value) ||
+                RegExp(/^\s*$|\s+(?=\s{1,2})/).test(isbn.value))
     }
 
     static isAnyFieldOutOfLength(form) {
@@ -154,7 +154,7 @@ class UI {
     static showSearchedBooks(input, currentPage) {
         const books = this.currentPageBooks
 
-        if(!RegExp(/\s/).test(input.value)) {
+        if(!RegExp(/^\s+$|\s+(?=\s{1,2})/).test(input.value)) {
             const result = books.filter(({ title }) => (
                 RegExp(input.value.toLowerCase()).test(title.toLowerCase()) &&
                 input.value !== '')
