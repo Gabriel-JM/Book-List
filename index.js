@@ -41,7 +41,7 @@ function notFound(res) {
 }
 
 const server = http.createServer(async (req, res) => {
-  if(req.url === '/index-server.js') notFound(res)
+  if(req.url === '/index.js') notFound(res)
 
   const fileName = verifyUrl(req.url)
   const extension = fileName.split('.')[1]
