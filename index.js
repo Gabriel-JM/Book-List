@@ -7,7 +7,6 @@ const port = process.env.PORT || 8000
 function verifyUrl(url) {
   const verification = url === '/' || !isFileRequest(url)
   const indexPath = path.join('index.html')
-  //const parsedUrl = !verification ? adjustUrl(url) : url
 
   return verification ? indexPath : url
 }
@@ -16,12 +15,6 @@ function isFileRequest(url) {
   const regexs = [/\.([a-z]){1,4}/]
   return regexs.every(regex => RegExp(regex).test(url))
 }
-
-// function adjustUrl(url) {
-//   if(!RegExp(/^src/).test(url)) {
-//     return `src${url.split('src')[1]}`
-//   }
-// }
 
 async function getFileContent(path) {
   try {
